@@ -1,31 +1,23 @@
-const { sosaData } = require('../CK.js')
+const express = require('express');
 
+const { sosaData } = require('../CK.js');
 
+const getFile = (req, res) => {res.json(sosaData)}
 
+const postFile = (req, res) => {sosaData.push(req.body)
+    res.send(sosaData)
+   }
 
+const deleteFile = (req, res) => {
 
-const getData =  (req, res) => {res.json(sosaData)}
+const iden = sosaData.find((sosa)=> {sosa.id === id})
+        const isFilt = (num) => {
+            if(num != req.params.id){
 
-const postData = (req, res) => {
-
-
-
-    sosaData.push(req.body)
-    res.end()
-} 
-
-
-const deleteData = (req, res) => {
-    const id = parseInt(req.params.id)
-
-    const person = sosaData.find((sosa)=> {sosa.id === id})
-
-    if(!person){
-        return res.status(404).json({"BangBng": `No data with ${id}`})
+        } else {return num != req.params.id}
     }
-   const NEW = sosaData.filter((people)=> {people.id !== id })
+ res.send(sosaData.filter(isFilt))
 
-   return res.status(200).json({success: true, data: NEW });
 }
 
-module.exports = {getData, postData, deleteData}
+module.exports = { getFile, postFile, deleteFile }

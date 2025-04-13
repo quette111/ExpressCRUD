@@ -1,13 +1,19 @@
-const express = require('express')
+const express = require('express');
+
+const {getFile, postFile, deleteFile}   = require('../controllers/data.js')
 const router = express.Router()
-const {getData, postData, deleteData} = require('../controllers/data.js')
 
 
+router.get('/', getFile)
 
-router.get('/', getData)
+router.post('/', postFile)
 
-router.post('/', postData)
+router.delete('/:id', deleteFile)
+//router.post(function)
 
-router.delete('/:id', deleteData)
 
-module.exports = router
+//router.delete(function)
+
+
+module.exports = { router }
+

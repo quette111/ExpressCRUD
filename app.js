@@ -1,29 +1,14 @@
 const express = require('express');
 const app = express()
-const router  = require('./routers/router.js')
+const PORT = 3001;
 
-const port = 3000
+const { router } = require('./routers/router.js')
+const logger = (req, res, next) => {
+    console.log(req.method)
+    next()}
+app.use(logger)
 
 app.use(express.json())
-app.use(express.urlencoded({ extended: false }));
-app.use('/api/v1/songs', router)
+app.use('/api/v1/sosa', router)
 
-
-
-
-
-
-
-app.all('*'), (req, res) => {//not working as expected
-    res.json({"ERROR OCCURRED": "U FKD UP"})
-}
-
-
-
-
-
-app.listen(port, () => {
-    console.log(`Spinning and spinning these mf ports on port ${port}...`)
-})
-
-module.exports = express
+app.listen(PORT, (req, res)=> console.log(`Server running on port ${PORT}...`))
