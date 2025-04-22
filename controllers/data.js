@@ -1,17 +1,27 @@
-const express = require('express');
+const {sosaData} = require('../CK.js')
+const {scm} = require('../models/task.js')
 
-let { sosaData } = require('../CK.js');
 
-const getFile = (req, res) => {res.json(sosaData)}
-
-const postFile = (req, res) => {sosaData.push(req.body)
-    res.send(sosaData)
-   }
-
-const deleteFile = (req, res) => {
-
-   sosaData = sosaData.filter(song => song.id !== parseInt(req.params.id));
-    res.send(sosaData)
+const getEntry = async (req,res) => {
+  try {
+    await res.send(sosaData)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
-module.exports = { getFile, postFile, deleteFile }
+const postEntry = async (req,res) => {
+  try {
+     const newEntry = new scm(req.body)
+     await newEntry.save()
+     res.status(201).json(newEntry)
+
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
+
+
+module.exports = {getEntry, postEntry}

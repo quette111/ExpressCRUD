@@ -1,19 +1,15 @@
-const express = require('express');
-
-const {getFile, postFile, deleteFile}   = require('../controllers/data.js')
+const express = require('express')
+const {getEntry, postEntry} = require('../controllers/data.js')
 const router = express.Router()
 
+router.get('/', getEntry)
 
-router.get('/', getFile)
+//router.put('api/v1/data', putEntry)
 
-router.post('/', postFile)
+router.post('/', postEntry)
 
-router.delete('/:id', deleteFile)
-//router.post(function)
+//router.delete('api/v1/data/:ID', deleteSingleEntry)
 
-
-//router.delete(function)
-
+//router.get('api/v1/data:ID', getSingleEntry)
 
 module.exports = { router }
-

@@ -1,14 +1,13 @@
 const express = require('express');
-const app = express()
-const PORT = 3002;
-
 const { router } = require('./routers/router.js')
-const logger = (req, res, next) => {
-    console.log(req.method)
-    next()}
-app.use(logger)
-
+const {connectDB} = require('./mongoose/mongoose.js')
+connectDB()
+const app = express()
 app.use(express.json())
-app.use('/api/v1/sosa', router)
+app.use('/api/v1/data', router)
 
-app.listen(PORT, (req, res)=> console.log(`Server running on port ${PORT}...`))
+const PORT = 3000
+
+
+
+app.listen(PORT, console.log(`working .  . . . on port: ${PORT}`))
