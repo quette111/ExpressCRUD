@@ -1,13 +1,21 @@
 const express = require('express');
+const app = express();
+const PORT = 3000;
+
+const {mon} = require('./mongoose/mongoose.js')
 const { router } = require('./routers/router.js')
-const {connectDB} = require('./mongoose/mongoose.js')
-connectDB()
-const app = express()
+app.use('/api/v1/data',router)
 app.use(express.json())
-app.use('/api/v1/data', router)
+app.use(mon)
 
-const PORT = 3000
+app.get('/', (req,res)=>{
+    console.log('Gucci mane love javascript')
+})
 
 
 
-app.listen(PORT, console.log(`working .  . . . on port: ${PORT}`))
+
+
+app.listen(PORT, ()=>{
+    console.log(`GUCCI GOT SOME YOUNG NIGGAS JR CODE APPRENTICES ON PORT:${PORT} . . . `)
+})

@@ -1,12 +1,11 @@
-const mongoose = require('mongoose');
 
+const mongoose =  require('mongoose')
 
-const mySchema = new mongoose.Schema({
+const dataSchema = new mongoose.Schema({
     name: String,
-    ofAge: Boolean,
+    loveJS: Boolean
 })
 
+const gmljs = mongoose.model('test', dataSchema)
 
-const scm = mongoose.model('test', mySchema)
-
-module.exports = { scm }
+module.exports ={gmljs}

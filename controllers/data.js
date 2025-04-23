@@ -1,55 +1,29 @@
-const { sosaData } = require('../CK.js')
-const { scm } = require('../models/task.js')
+const {gmljs} = require('../models/task.js')
 
 
-const getEntry = async (req, res) => {
-  try {
-    await res.send(sosaData)
-  } catch (error) {
-    console.log(error)
-  }
+const getData = async(req,res) => {
+
 }
 
-const postEntry = async (req, res) => {
-  try {
-    const newEntry = new scm(req.body)
-    await newEntry.save()
-    res.status(201).json(newEntry)
+const postData = async(req,res) => {
 
-  } catch (error) {
-    console.log(error)
-  }
+const newOne = await new gmljs(req.body)
+newOne.save()
+
 }
 
-const putEntry = async (req, res) => {
-  try {
-    const updated = await scm.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
+const putData = async(req,res) => {
 
-    });
-
-    res.status(200).json(updated)
-
-  } catch (error) {
-    console.log(error)
-  }
 }
 
-const deleteEntry = async (req, res) => {
-  try { 
-  const deleted = await scm.findByIdAndDelete(req.params.id);
-  res.status(200).json(deleted)
-    
-  } catch (error) {
-    console.log(error)
-  }
+const patchData  = async(req,res) => {
+
 }
 
+const deleteData  = async(req,res) => {
+   const del = gmljs.findByIdAndDelete(req.params.id)
+   await del
+  
+}
 
-
-
-
-
-
-module.exports = { getEntry, postEntry, putEntry, deleteEntry }
+module.exports = { postData, putData, patchData, deleteData }
