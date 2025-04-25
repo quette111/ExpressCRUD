@@ -1,13 +1,9 @@
-const router = require('express').Router()
-const {deleteData} = require('../controllers/data.js')
-router.get('/')
+const express = require('express');
+const router = express.Router();
 
-router.post('/')
+const {postData, editData, deleteData} = require('../controllers/data.js');
 
-router.put('/')
-
-router.patch('/:id')
-
+router.post('/', postData)
+router.patch('/:id', editData)
 router.delete('/:id', deleteData)
-
 module.exports = {router}

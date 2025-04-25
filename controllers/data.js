@@ -1,29 +1,18 @@
-const {gmljs} = require('../models/task.js')
+const structure = require('../models/task.js');
 
-
-const getData = async(req,res) => {
-
+const postData = async (req, res) => {
+  const newnew = await structure.create(req.body)
+ res.send(newnew)
 }
 
-const postData = async(req,res) => {
-
-const newOne = await new gmljs(req.body)
-newOne.save()
-
+const editData = async (req, res) => {
+   const edited = await structure.findByIdAndUpdate(req.params.id, req.body)
+   res.send(edited)
 }
 
-const putData = async(req,res) => {
-
+const deleteData = async (req, res) => {
+   const deleted = await structure.findByIdAndDelete(req.params.id)
+   res.send(deleted)
 }
 
-const patchData  = async(req,res) => {
-
-}
-
-const deleteData  = async(req,res) => {
-   const del = gmljs.findByIdAndDelete(req.params.id)
-   await del
-  
-}
-
-module.exports = { postData, putData, patchData, deleteData }
+module.exports = {postData, editData, deleteData}
