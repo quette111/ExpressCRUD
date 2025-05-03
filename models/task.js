@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
-const newStructure = new mongoose.Schema({
+const newData = new mongoose.Schema({
     name: String
 })
 
-const structure = mongoose.model('test', newStructure)
+const dataSchema = mongoose.model('test', newData)
 
-module.exports = structure;
+module.exports = {dataSchema}

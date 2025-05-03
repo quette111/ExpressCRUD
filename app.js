@@ -1,27 +1,22 @@
-const express = require('express') //importing express 
-const app = express(); //creating instance of express and storing it in a variable
+const express = require('express');
+const app = express()
+const PORT = 3000
+const { router } = require('./routers/router.js');
 const mongoose = require('mongoose');
-const PORT = 3002
-require('dotenv').config()
 
-const {router} = require('./routers/router.js'); //importing router logic 
-
+require('dotenv').config();
 
 app.use(express.json())
+app.use('/api/v1/data', router)
 
-
-app.use('/api/v1/data', router); //using router middleware logic to use filepath;
-
-const start = async () =>{
+const start = async () => {
     try{
-        console.log('trying')
         await mongoose.connect(process.env.MONGO_URI)
-        console.log('URI')
-        app.listen(PORT)
-        console.log('PORT')
+        app.listen(PORT, console.log(`Server has started on port: ${PORT} . . . `))
     } catch(error){
-        console.error(`Error: ${error} no worky`)
+        console.error('Error', error)
     }
 }
 
 start()
+
