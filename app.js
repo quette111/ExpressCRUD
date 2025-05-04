@@ -1,22 +1,30 @@
+
+require('express-async-errors')
+const mongoose = require('mongoose')
 const express = require('express');
-const app = express()
-const PORT = 3000
-const { router } = require('./routers/router.js');
-const mongoose = require('mongoose');
+const router = require('./routers/router')
+const app = express();
+const port = process.env.PORT || 3001
+const cors = require('cors');
+app.use(cors());
 
-require('dotenv').config();
+require('dotenv').config()
+app.use(express.json());
+app.use('/api/v1', router)
+app.use(express.static('./public'))
+app.get('/', (req, res)=> {
+    res.send({msg:`File served!`})
+})
 
-app.use(express.json())
-app.use('/api/v1/data', router)
+const start = async (req, res) => {
+    try{        
+         app.listen(port, console.log(`Port listening on port: ${port}`))
 
-const start = async () => {
-    try{
-        await mongoose.connect(process.env.MONGO_URI)
-        app.listen(PORT, console.log(`Server has started on port: ${PORT} . . . `))
-    } catch(error){
-        console.error('Error', error)
+         mongoose.connect(process.env.MONGO_URI, console.log('Database connected'))
+       
+    } catch (error){
+console.log(error)
     }
 }
 
 start()
-

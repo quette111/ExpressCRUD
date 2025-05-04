@@ -1,15 +1,23 @@
-const { dataSchema } = require('../models/task.js');
+const loggingInData = require('../models/task')
+const jwt = require('jsonwebtoken');
 
+const login = async(req, res) => {
+   const {username, password} = req.body
 
-const postData = async (req, res) => {
-   try{
-  const theNewShit = await dataSchema.create(req.body)
-   res.send(theNewShit)
-   } catch (error){
-      res.status(404)
+   if(!username || ! password){
+      console.log('You must provide a un and pw')
    }
+
+   const key = await jwt.sign(username,process.env.JWT_KEY)
+
+   const dataStored = await loggingInData.create(req.body)
+   res.status(200).send(key)
 }
 
+const landing = async (req, res) => {
 
 
-module.exports = { postData }
+   console.log('landing page babbyy')
+}
+
+module.exports = {login,landing}

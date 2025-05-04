@@ -1,7 +1,11 @@
-const router = require('express').Router()
+const express = require('express');
+const router = express.Router()
+const { landing, login } = require('../controllers/data');
 
-const { postData } = require('../controllers/data.js')
 
-router.post('/', postData)
+const auth = require('../middleware/auth')
 
-module.exports = { router }
+router.route('/login').post(login)
+router.route('/landing').get(auth, landing)
+
+module.exports = router
