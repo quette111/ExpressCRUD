@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="file.css" />
   </head>
   <body>
-    <h1>YN CREATE</h1>
+    <h1 id="create">CREATE AN ACCOUNT</h1>
     <div id="outerForm">
       <form id="form" method="post">
         <label for="username">username:</label>
@@ -16,8 +16,11 @@
         <label for="password">password:</label>
         <input type="password" id="password" />
         <br />
-        <button type="submit" id="submit">LOGIN</button>
+        <button type="submit" id="submit">ENTER</button>
       </form>
+      <div id="verificationBlock">
+        <button id="verifyButton">Verify</button>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

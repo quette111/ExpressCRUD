@@ -6,7 +6,7 @@ async function postData() {
     if (!username || !password) {
 
         document.getElementById('outerForm').style.cssText = 'border:2px solid red'
-        let para = document.createElement("p")
+        window.para = document.createElement("p")
         para.style.cssText = 'color:red';
         para.innerText = "Please enter a username and password . . .";
         document.body.appendChild(para)
@@ -15,17 +15,17 @@ async function postData() {
     }
     else {
         try {
-            const response = await axios.post('http://localhost:3001/api/v1/login', {
+            window.response = await axios.post('http://localhost:3001/api/v1/login', {
                 username: username,
                 password: password,
             });
             console.log(response.data);
             document.getElementById('outerForm').style.cssText = 'border:2px solid green;'
-            let paraG = document.createElement("p")
-            paraG.style.cssText = 'color:green;transition: opacity 250ms ease-in;';
-            paraG.innerText = "Successfully created an account . . .";
-            document.body.appendChild(paraG)
-            para.remove()
+            
+            para.style.cssText = 'color:green;transition: opacity 250ms ease-in;';
+            para.innerHTML = "Successfully created an account . . .";
+            document.body.appendChild(para)
+            document.getElementById('create').innerHTML = 'Login . . . '
         } catch (error) {
             console.error('Error sending frontend data', error)
         }
@@ -42,4 +42,26 @@ form.addEventListener('submit', (e) => {
     document.getElementById('username').value = ''
     document.getElementById('password').value = ''
 
+})
+async function verify() {
+    if (!response.data) {
+        let unauthText = document.createElement("p")
+        unauthText.style.cssText = 'color:red';
+        unauthText.innerText = "You are not authorized . . .";
+        document.getElementById('verificationBlock').appendChild(unauthText)
+
+    }
+    else {
+        try {
+            const respond = await axios.get('http://localhost:3001/api/v1/landing')
+            let winner = document.createElement('p');
+            winner.innerText = 'Logged in'
+            document.body.appendChild(winner)
+        } catch (error) {
+            console.log('Error fetching secret data', error)
+        }
+    }
+}
+document.getElementById('verifyButton').addEventListener('click', () => {
+    verify()
 })

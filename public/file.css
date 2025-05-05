@@ -1,0 +1,19 @@
+h1{text-align: center;
+    background-color: bisque;}
+
+#outerForm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(215, 214, 214);
+    border: solid black 1px;
+    border-radius: 50px;
+    padding: 3%;
+    margin:5%;
+}
+
+button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
