@@ -17,3 +17,11 @@ button{
     align-items: center;
     justify-content: center;
 }
+
+#info{
+    color:blueviolet;
+}
+
+#block{
+    background-color: red;
+}
