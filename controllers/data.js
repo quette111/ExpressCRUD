@@ -18,7 +18,7 @@ const login = async(req, res, next) => {
 const landing = async (req, res) => {
 
 
-   console.log('landing page babbyy')
+   console.log('landing page babby')
    res.status(200).send(`<div><h1 id='info'>YOUR PERSONAL INFO! :-)</h1></div>`)
 }
 
