@@ -11,7 +11,7 @@ const data = new Schema({
     password:{
         type:String,
         required:true,
-        minLength:10
+        minLength:12
     }
 })
   
